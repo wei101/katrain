@@ -30,7 +30,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="KaTrain",
+    name="KaTrain101",
     version=version,
     description="Go/Baduk/Weiqi playing and teaching app with a variety of AIs",
     long_description=long_description,
@@ -51,7 +51,7 @@ setup(
     ],
     dependency_links=["https://kivy.org/downloads/simple/"],
     python_requires=">=3.7, <4.0",
-    entry_points={"console_scripts": ["katrain=katrain.__main__:run_app"]},
+    # entry_points={"console_scripts": ["katrain=katrain.__main__:run_app"]},
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Operating System :: Microsoft :: Windows",

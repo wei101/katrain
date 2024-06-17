@@ -1,6 +1,6 @@
 {
     "engine": {
-        "katago": "",
+        "katago": "/home/zjk/prjs/101weiqi/KataGo/build_cuda_0612_f2dc582f/katago",
         "altcommand": "",
         "model": "katrain/models/kata1-b18c384nbt-s6582191360-d3422816034.bin.gz",
         "config": "katrain/KataGo/analysis_config.cfg",
