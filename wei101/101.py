@@ -1,18 +1,37 @@
+import json
+
 from katrain.core.base_katrain import KaTrainBase
 from katrain.core.engine import KataGoEngine
 from katrain.core.game import Game, KaTrainSGF
 
-katrain = KaTrainBase(force_package_config=True, debug_level=0)
+katrain = KaTrainBase(force_package_config=True, debug_level=2)
 engine = KataGoEngine(katrain, katrain.config("engine"))
-# print(engine.config)
+#                                                             #d16   d17   d18   f18   c17   f17   e17   f16
+# sgf = "(;GM[1]FF[4]RU[japanese]PB[zjk]PW[xiaozhi]CA[UTF-8];B[dd];W[dc];B[db];W[fb];B[cc];W[fc];B[ec];W[fd];)"
 
-moves = KaTrainSGF.parse_sgf("(;GM[1]FF[4]RU[japanese]PB[zjk]PW[xiaozhi]CA[UTF-8];B[pd];W[po];B[dd];)")
+with open("test-sgf/101weiqi-2024-06-25.sgf") as fin:
+    lines = fin.readlines()
+    sgf = "".join(lines)
 
-game = Game(katrain, engine)
+move_tree = KaTrainSGF.parse_sgf(sgf)
 
-print(moves.nodes_in_tree)
+# node = moves.nodes_in_tree[-1]
 
-node = moves.nodes_in_tree[-1]
-node.analyze(engine, analyze_fast=False)
+game = Game(katrain, engine, move_tree=move_tree)
+game.redo(140)
+# print(game.board_size, game.stones, len(game.stones))
+stones = game.stones
 
+output = []
+for st in stones:
+    output.append([st.player, st.coords[0], st.coords[1]])
+joutput = json.dumps(output)
+with open("./test-sgf/101weiqi-2024-06-25-140.json", "w") as fout:
+    fout.writelines([joutput])
+
+# node.analyze(engine, analyze_fast=False)
+
+engine.wait_to_finish()
+
+print("zjk")
 
