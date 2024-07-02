@@ -453,10 +453,10 @@ class Game(BaseGame):
         self.insert_after = None
         self.region_of_interest = None
 
-        threading.Thread(
-            target=lambda: self.analyze_all_nodes(analyze_fast=analyze_fast, even_if_present=False),
-            daemon=True,
-        ).start()  # return faster, but bypass Kivy Clock
+        # threading.Thread(
+        #     target=lambda: self.analyze_all_nodes(analyze_fast=analyze_fast, even_if_present=False),
+        #     daemon=True,
+        # ).start()  # return faster, but bypass Kivy Clock
 
     def analyze_all_nodes(self, priority=PRIORITY_GAME_ANALYSIS, analyze_fast=False, even_if_present=True):
         for node in self.root.nodes_in_tree:
