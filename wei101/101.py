@@ -31,7 +31,13 @@ with open("./test-sgf/101weiqi-2024-06-25-140.json", "w") as fout:
 
 # node.analyze(engine, analyze_fast=False)
 
+game.current_node.analyze(engine, analyze_fast=False)
 engine.wait_to_finish()
+
+
+with open("./test-sgf/101weiqi-2024-06-25-140-analysis.json", "w") as fout:
+    ownership = json.dumps(game.current_node.analysis["ownership"])
+    fout.writelines(ownership)
 
 print("zjk")
 

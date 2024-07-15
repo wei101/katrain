@@ -217,8 +217,16 @@ class KataGoEngine(BaseEngine):
         return ok
 
     def wait_to_finish(self):
-        while self.queries and self.katago_process and self.katago_process.poll() is None:
-            time.sleep(0.1)
+        bq = True
+        bkp = True
+        bpoll = True
+        time.sleep(0.2)
+        while bq and bkp and bpoll:
+            bq = bool(self.queries)
+            bkp = bool(self.katago_process)
+            bpoll = self.katago_process.poll() is None
+            print(f"wait {len(self.queries)} {bkp} poll {bpoll}")
+            time.sleep(0.2)
 
     def shutdown(self, finish=False):
         process = self.katago_process
